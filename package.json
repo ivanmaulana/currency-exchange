@@ -13,7 +13,8 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "why-did-you-update": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start",

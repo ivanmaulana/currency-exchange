@@ -1,24 +1,19 @@
-import React, { Component } from 'react'
-import connect from '../store/connect'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { changeBaseValue } from '../store/actions'
+import mapStateToProps from '../utils/mapState'
 
-class BaseCurrency extends Component {
-  constructor(props) {
-    super(props)
-
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange(event) {
-    this.props.changeBaseValue(event.target.value)
-  }
-
+class BaseCurrency extends PureComponent {
   render() {
     const {
       base: {
         name,
         value
       },
-      dictionaries
+      dictionaries,
+
+      // actions
+      changeBaseValue
     } = this.props
 
     return (
@@ -39,7 +34,7 @@ class BaseCurrency extends Component {
                 min="0"
                 className="form-control"
                 value={value}
-                onChange={this.handleChange}
+                onChange={(e) => changeBaseValue(e.target.value)}
               />
             </div>
           </div>
@@ -49,4 +44,7 @@ class BaseCurrency extends Component {
   }
 }
 
-export default connect(BaseCurrency)
+const mapState = mapStateToProps('app', ['base', 'dictionaries'])
+const mapActions = { changeBaseValue }
+
+export default connect(mapState, mapActions)(BaseCurrency)

@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import Spinner from './Spinner'
-import connect from '../store/connect'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { removeCurrencies } from '../store/actions'
 import { formatCurrency } from '../utils/formats'
+import Spinner from './Spinner'
 
-class Currency extends Component {
+class Currency extends PureComponent {
   render() {
     const {
       rates,
@@ -60,4 +61,18 @@ class Currency extends Component {
   }
 }
 
-export default connect(Currency)
+function mapStateToProps(reducer, selectedStates) {
+  return (state) => {
+    return selectedStates.reduce((acc, curr) => ({...acc,
+      [curr]: state[reducer][curr]
+    }), {})
+  }
+}
+
+const reducer = 'app'
+const selectedStates = ['rates', 'dictionaries', 'base']
+
+const mapState = mapStateToProps(reducer, selectedStates)
+const mapActions = { removeCurrencies }
+
+export default connect(mapState, mapActions)(Currency)

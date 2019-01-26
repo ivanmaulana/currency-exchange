@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { getDictionaries, getRates } from './store/actions'
+import mapStateToProps from './utils/mapState'
 import BaseCurrency from './Components/BaseCurrency'
 import Currency from './Components/Currency'
 import FormAddCurrency from './Components/FormAddCurrency'
 import BtnAddCurrency from './Components/BtnAddCurrency'
-import connect from './store/connect'
 
 class App extends Component {
   componentDidMount() {
@@ -42,4 +44,7 @@ class App extends Component {
   }
 }
 
-export default connect(App);
+const mapState = mapStateToProps('app', ['currencies', 'isOpenAddCurrencyForm'])
+const mapActions = { getDictionaries, getRates }
+
+export default connect(mapState, mapActions)(App);

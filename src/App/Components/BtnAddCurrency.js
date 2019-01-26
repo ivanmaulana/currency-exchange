@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
-import connect from '../store/connect'
+import { connect } from 'react-redux'
+import { toggleAddCurrencyForm } from '../store/actions'
+import mapStateToProps from '../utils/mapState'
 
 class BtnAddCurrency extends PureComponent {
   render() {
@@ -11,4 +13,7 @@ class BtnAddCurrency extends PureComponent {
   }
 }
 
-export default connect(BtnAddCurrency)
+const mapState = mapStateToProps('app', ['base', 'dictionaries'])
+const mapActions = { toggleAddCurrencyForm }
+
+export default connect(mapState, mapActions)(BtnAddCurrency)

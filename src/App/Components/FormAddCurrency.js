@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import connect from '../store/connect'
+import { connect } from 'react-redux'
+import { addCurrency } from '../store/actions'
+import mapStateToProps from '../utils/mapState'
 
 class AddCurrency extends Component {
   constructor(props) {
@@ -52,4 +54,7 @@ class AddCurrency extends Component {
   }
 }
 
-export default connect(AddCurrency)
+const mapState = mapStateToProps('app', ['currency'])
+const mapActions = { addCurrency }
+
+export default connect(mapState, mapActions)(AddCurrency)

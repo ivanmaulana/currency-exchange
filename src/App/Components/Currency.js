@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { removeCurrencies } from '../store/actions'
 import { formatCurrency } from '../utils/formats'
+import mapStateToProps from '../utils/mapState'
 import Spinner from './Spinner'
 
 class Currency extends PureComponent {
@@ -58,14 +59,6 @@ class Currency extends PureComponent {
         </div>
       </div>
     )
-  }
-}
-
-function mapStateToProps(reducer, selectedStates) {
-  return (state) => {
-    return selectedStates.reduce((acc, curr) => ({...acc,
-      [curr]: state[reducer][curr]
-    }), {})
   }
 }
 
